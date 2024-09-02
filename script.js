@@ -1,29 +1,28 @@
-// document.getElementById('dataForm').addEventListener('submit', function(event) {
-//     event.preventDefault();
+document.getElementById('dataForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Impede o envio padrão do formulário
 
-//     const name = document.getElementById('name').value;
-//     const email = document.getElementById('email').value;
+    // Captura os dados do formulário
+    var formData = new FormData(this);
 
-//     // Enviar os dados para uma planilha
-//     fetch('https://api.sheety.co/YOUR_PROJECT_ID/your_endpoint', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({
-//             yourData: {
-//                 name: name,
-//                 email: email
-//             }
-//         })
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//         console.log('Success:', data);
-//         alert('Dados enviados com sucesso!');
-//     })
-//     .catch((error) => {
-//         console.error('Error:', error);
-//         alert('Erro ao enviar dados.');
-//     });
-// });
+    // Envia os dados via AJAX usando fetch
+    fetch('https://script.google.com/macros/s/AKfycbzOPJsRuvCP-WlSFAM0_JEWzKO1MEsq_aQ0uA1ZTrmeXqXMLXtFt_iPWOlvKsihC2p_KA/exec', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        var responseMessage = document.getElementById('responseMessage');
+        responseMessage.textContent = "Sucesso: " + data.message;
+
+        // Apaga os campos do formulário após o sucesso
+        document.getElementById('dataForm').reset();
+
+        // Remove a mensagem após 3 segundos
+        setTimeout(() => {
+            responseMessage.textContent = '';
+        }, 3000);
+    })
+    .catch(error => {
+        document.getElementById('responseMessage').textContent = "Ocorreu um erro: " + error.message;
+    });
+});

@@ -3,17 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulário de Dados</title>
-    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <title>Formulário de Dados!</title>
+    <link rel="icon" href="https://img.icons8.com/?size=100&id=beXJCeFDAiBs&format=png&color=000000" type="image/png">
 </head>
 <body>
-    <h1>Formulário de Dados</h1>
-    <form action="https://script.google.com/macros/s/AKfycbzOPJsRuvCP-WlSFAM0_JEWzKO1MEsq_aQ0uA1ZTrmeXqXMLXtFt_iPWOlvKsihC2p_KA/exec" method="post">
+    <h1>Formulário de Dados!!</h1>
+    
+    <!-- O formulário que será enviado via AJAX -->
+    <form id="dataForm">
         <input type="text" name="name" placeholder="Nome" required>
         <input type="email" name="email" placeholder="Email" required>
         <button type="submit">Enviar</button>
     </form>
-    
-    <!-- <script src="script.js"></script> -->
+
+    <p id="responseMessage"></p>
+
+    <!-- Incluindo o script JS externo -->
+    <script src="script.js"></script>
 </body>
 </html>
