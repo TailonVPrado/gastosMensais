@@ -34,7 +34,7 @@ function toggleOptionTipo() {
         updateSelectOptionsTipo(['Salario', 'Extra', 'Presente', 'Outros']);
     } else {
         labelTextField.innerHTML = 'Tipo Despesa';
-        updateSelectOptionsTipo(['Comida', 'Mercado', 'Gasolina', 'Roupa', 'Presente', 'Outros']);
+        updateSelectOptionsTipo(['Comida', 'Mercado', 'Gasolina', 'Roupa', 'Viagem', 'Presente', 'Outros']);
     }
 }
 
