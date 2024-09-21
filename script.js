@@ -108,9 +108,6 @@ async function validateForm() {
         if (!responsavelMovimentacaoLarissa && !responsavelMovimentacaoTailon) {
             throw new Error('Informe o responsável pela movimentação!');
         }
-        if (!valor) {
-            throw new Error('Informe o valor!');
-        }
 
         if (tipoMovimentacaoDespesa) {
             if (tipo.toUpperCase() == 'SELECIONE UMA OPÇÃO') {
@@ -119,6 +116,11 @@ async function validateForm() {
             if (tipo.toUpperCase() == 'OUTROS' && !descricao) {
                 throw new Error('Para o tipo de despesa "Outros" é necessário que se seja informado uma descricao!');
             }
+            
+            if (!valor) {
+                throw new Error('Informe o valor!');
+            }
+
             if (formaPagamento.toUpperCase() == 'SELECIONE UMA OPÇÃO') {
                 throw new Error('Informe a forma de pagamento!');
             }
@@ -129,6 +131,10 @@ async function validateForm() {
             }
             if (tipo.toUpperCase() == 'OUTROS' && !descricao) {
                 throw new Error('Para o tipo de receita "Outros" é necessário que se seja informado uma descricao!');
+            }
+            
+            if (!valor) {
+                throw new Error('Informe o valor!');
             }
         }
     } catch (error) {
@@ -151,7 +157,10 @@ async function sendData(form) {
         .then(data => {
             var responseMessage = document.getElementById('responseMessage');
             responseMessage.textContent = "Sucesso: " + data.message;
-
+            
+            setTimeout(() => {
+                responseMessage.textContent = "";
+            }, 3000);
             // Apaga os campos do formulário após o sucesso
             resetFormulario();
         })
