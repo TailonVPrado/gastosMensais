@@ -182,3 +182,25 @@ function resetFormulario(){
     document.getElementById('quantidadeParcercela').value = '';
     onChangeFormaPagamento();
 }
+
+//TODO AINDA NAO TERMINADO
+document.getElementById('formularioGet').addEventListener('submit', async function (event) {
+    console.log('formularioGet');
+    
+    event.preventDefault()
+    var formData = new FormData(this);
+    // Envia os dados via AJAX usando fetch
+    fetch('https://script.google.com/macros/s/AKfycbzOPJsRuvCP-WlSFAM0_JEWzKO1MEsq_aQ0uA1ZTrmeXqXMLXtFt_iPWOlvKsihC2p_KA/exec', {
+        method: 'POST',
+        body: formData,
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            alert(error?.message)
+        }).finally(() => {
+            // Esconde o spinner após receber a resposta (sucesso ou erro)
+        });;
+});
