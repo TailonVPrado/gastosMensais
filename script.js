@@ -24,6 +24,8 @@ function toggleFieldFormaPagamento() {
     }
 }
 
+tipoDespesa = ['Comida', 'Mercado', 'Farmacia', 'Combustivel', 'Roupa', 'Viagem', 'Presente', 'Casa', 'Outros'];
+tipoPgtoDespesa = ['Debito', 'Crédito', 'PIX', 'Dinheiro'];
 function toggleOptionTipo() {
     console.log('toggleOptionTipo')
 
@@ -34,7 +36,7 @@ function toggleOptionTipo() {
         updateSelectOptionsTipo(['Salario', 'Extra', 'Presente', 'Outros']);
     } else {
         labelTextField.innerHTML = 'Tipo Despesa';
-        updateSelectOptionsTipo(['Comida', 'Mercado', 'Farmacia', 'Gasolina', 'Roupa', 'Viagem', 'Presente', 'Casa', 'Outros']);
+        updateSelectOptionsTipo(tipoDespesa);
     }
 }
 
@@ -94,8 +96,6 @@ async function validateForm() {
     console.log('validateForm');
 
     try {
-        var responsavelMovimentacaoLarissa = document.getElementById('responsavelMovimentacaoLarissa').checked
-        var responsavelMovimentacaoTailon = document.getElementById('responsavelMovimentacaoTailon').checked
         var tipoMovimentacaoDespesa = document.getElementById('tipoMovimentacaoDespesa').checked
         var tipoMovimentacaoReceita = document.getElementById('tipoMovimentacaoReceita').checked
         var tipo = document.getElementById('tipo').value
@@ -105,9 +105,6 @@ async function validateForm() {
         var formaPagamento = document.getElementById('formaPagamento').value
         var quantidadeParcercela = document.getElementById('quantidadeParcercela').value
 
-        if (!responsavelMovimentacaoLarissa && !responsavelMovimentacaoTailon) {
-            throw new Error('Informe o responsável pela movimentação!');
-        }
 
         if (tipoMovimentacaoDespesa) {
             if (tipo.toUpperCase() == 'SELECIONE UMA OPÇÃO') {
@@ -148,7 +145,9 @@ async function sendData(form) {
 
     var formData = new FormData(form);
     document.getElementById('spinner-overlay').style.display = '';
-    // Envia os dados via AJAX usando fetch
+    formData.append('tipoDespesa', JSON.stringify(tipoDespesa))
+    formData.append('tipoPgtoDespesa', JSON.stringify(tipoPgtoDespesa))
+
     fetch('https://script.google.com/macros/s/AKfycbzOPJsRuvCP-WlSFAM0_JEWzKO1MEsq_aQ0uA1ZTrmeXqXMLXtFt_iPWOlvKsihC2p_KA/exec', {
         method: 'POST',
         body: formData,
